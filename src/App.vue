@@ -1,19 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+
+  <MyJumbotron v-bind:myFirstList="list" ></MyJumbotron>
+  
+</div>
+
 </template>
 
+
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import MyJumbotron from './components/MyJumbotron.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+   MyJumbotron
+  },
+   data() {
+     return {
+      list: [
+        {id: 0, name: "Ecrire le sujet", todo: true},
+        {id: 1, name: "Faire le sujet", todo: true},
+        {id: 2, name: "Vendre le sujet", todo: true},
+        {id: 3, name: "Partir en vaccances", todo: true}
+    ]
+     }
+   
   }
 }
+
+
 </script>
 
 <style>
