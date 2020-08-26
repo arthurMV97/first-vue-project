@@ -2,8 +2,7 @@
 
 <ul>
         <li v-for="todo in list" :key="todo.id">
-            <b-icon icon="check2-circle" v-if="todo.todo"></b-icon>
-            <b-icon icon="check-circle-fill" v-else></b-icon>
+           
             <SingleTodo v-bind:todo="todo" @toggle="sendIdToJumbo"></SingleTodo> 
         </li>
     </ul>    
@@ -48,7 +47,7 @@ li {
 }
 
 li > p {
-    margin-left: 8px;
+    margin-left: 15px;
     
 }
 

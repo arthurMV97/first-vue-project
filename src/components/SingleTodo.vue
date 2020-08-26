@@ -1,6 +1,14 @@
 <template>
-    <p v-if="todo.todo" @click="checkedTodo">{{todo.name}}</p>
-    <p v-else class="clickedP" @click="checkedTodo">{{todo.name}}</p>
+     
+    <p v-if="todo.todo" @click="checkedTodo">
+        <b-icon icon="check2-circle"></b-icon>
+        {{todo.name}}
+        </p>
+    
+    <p v-else class="clickedP" @click="checkedTodo">
+        <b-icon icon="check-circle-fill"></b-icon>
+        {{todo.name}}
+        </p>
 </template>
 
 

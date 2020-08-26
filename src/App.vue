@@ -1,6 +1,6 @@
 <template>
 <div>
-  <MyJumbotron v-bind:list="list" @toggle="changeIdValue"></MyJumbotron>
+  <MyJumbotron v-bind:list="list" @toggle="changeIdValue" @output="addTask"></MyJumbotron>
 </div>
 
 </template>
@@ -32,6 +32,14 @@ export default {
       // let liste = this.list
       this.list[id.id].todo = !this.list[id.id].todo
       
+    },
+    addTask(val) {
+      this.list.push({
+        id: this.list.length,
+        name: val,
+        todo: true
+      })
+      console.log(this.list)
     }
   }
 }
