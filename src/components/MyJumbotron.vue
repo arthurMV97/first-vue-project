@@ -14,22 +14,28 @@
     </p>
 
     <hr class="my-4">
-
-    <ul id="myFirstList">
-        <li v-for="item in myFirstList" :key="item.name"> {{item.name}} </li>
-    </ul> 
-   
+  
+    <ListTodo v-bind:list="list" @toggle="sendIdToApp"></ListTodo>
   </b-jumbotron>
   </div>
 </template>
 
 <script>
+import ListTodo from './ListTodo.vue'
+
 export default {
     name: 'MyJumbotron',
+    components: {
+      ListTodo
+    },
     props: {
-    myFirstList: Array,
-    msg: String
-  }
+    list: Array,
+  },
+  methods: {
+    sendIdToApp(id) {
+      this.$emit("toggle", id)
+    }
+    }
 }
 
 </script>

@@ -1,8 +1,6 @@
 <template>
 <div>
-
-  <MyJumbotron v-bind:myFirstList="list" ></MyJumbotron>
-  
+  <MyJumbotron v-bind:list="list" @toggle="changeIdValue"></MyJumbotron>
 </div>
 
 </template>
@@ -28,7 +26,13 @@ export default {
         {id: 3, name: "Partir en vaccances", todo: true}
     ]
      }
-   
+  },
+  methods: {
+    changeIdValue(id) {
+      // let liste = this.list
+      this.list[id.id].todo = !this.list[id.id].todo
+      
+    }
   }
 }
 
