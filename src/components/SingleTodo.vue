@@ -1,27 +1,32 @@
 <template>
      
-    <p v-if="todo.todo" @click="checkedTodo">
+    <p v-if="e.todo" @click="checkedTodo">
         <b-icon icon="check2-circle"></b-icon>
-        {{todo.name}}
+        {{e.name}}
         </p>
     
     <p v-else class="clickedP" @click="checkedTodo">
         <b-icon icon="check-circle-fill"></b-icon>
-        {{todo.name}}
+        {{e.name}}
         </p>
 </template>
 
 
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'SingleTodo',
     props: {
-    todo: Object
+    e: Object
   },
     methods: {
-        checkedTodo() {
-            this.$emit("toggle", {id: this.todo.id})
+        async checkedTodo() {
+            console.log(this.e.id)
+            await axios.put(`http://localhost:3000/todo/${this.e.id}`)
+            this.$emit("stateChange")
+          
         }
     }
 }

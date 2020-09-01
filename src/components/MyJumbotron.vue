@@ -1,8 +1,13 @@
 <template>
   <div id="app">
-    <b-jumbotron>
-    <template v-slot:header>Todo List</template>
+    <MyHeader></MyHeader>
 
+    <b-jumbotron>
+    
+    <template v-slot:header>
+      Todo List
+    </template>
+    
     <template v-slot:lead>
      New features we will have to do for this project.
     </template>
@@ -12,26 +17,28 @@
     <p>
       Easy to use, we create this web app just for you !
     </p>
-    <Sentence v-bind:list="list"></Sentence>
+    <Sentence></Sentence>
     <hr class="my-4">
-  
-    <ListTodo v-bind:list="list" @toggle="sendIdToApp"></ListTodo>
-    <AddForm @output="sendInputValue"></AddForm>
+   <router-view :key="$route.fullPath"></router-view>
+    <!-- <ListTodo  @toggle="sendIdToApp"></ListTodo> -->
+    <!-- <AddForm ></AddForm> -->
   </b-jumbotron>
   </div>
 </template>
 
 <script>
-import ListTodo from './ListTodo.vue'
-import AddForm from './AddForm.vue'
+// import ListTodo from './ListTodo.vue'
+// import AddForm from './AddForm.vue'
 import Sentence from './Sentence.vue'
+import MyHeader from './MyHeader.vue'
 
 export default {
     name: 'MyJumbotron',
     components: {
-      ListTodo,
-      AddForm,
-      Sentence
+      // ListTodo,
+      // AddForm,
+      Sentence,
+      MyHeader
     },
     props: {
     list: Array,
@@ -40,10 +47,16 @@ export default {
     sendIdToApp(id) {
       this.$emit("toggle", id)
     },
-    sendInputValue(val) {
-      this.$emit("output", val)
-    }
+    // sendInputValue(val) {
+    //   this.$emit("output", val)
+    // }
     }
 }
 
 </script>
+
+<style scoped>
+#app {
+  margin: 0 auto;
+}
+</style>

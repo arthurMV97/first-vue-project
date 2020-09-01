@@ -23,7 +23,7 @@ export default {
         {id: 0, name: "Ecrire le sujet", todo: true},
         {id: 1, name: "Faire le sujet", todo: true},
         {id: 2, name: "Vendre le sujet", todo: true},
-        {id: 3, name: "Partir en vaccances", todo: true}
+        {id: 3, name: "Partir en vacances", todo: true}
     ]
      }
   },
@@ -34,12 +34,16 @@ export default {
       
     },
     addTask(val) {
-      this.list.push({
+      if (val) {
+    this.list.push({
         id: this.list.length,
         name: val,
         todo: true
       })
-      console.log(this.list)
+      }
+      else {
+        window.alert("Please, enter a task!")
+      }
     }
   }
 }

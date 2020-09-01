@@ -30,16 +30,31 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'Sentence',
     props: {
-        list: Array,
+      
+  },
+  data() {
+      return {
+          list: Array,
+          newList: Array
+          }
   },
     methods: { 
         ifChecked() {
-            let newList = this.list.filter(e => e.todo === true)
-            return newList.length
+            
+            return this.newList.length
         }
+    }, async munted() {
+        console.log('hhh');
+            let dbList = await axios.get('http://localhost:3000/todo')
+            let myList = await dbList.data;
+            this.list = myList
+            this.newList = this.list.filter(e => e.todo === true)
+            
     }
 }
 </script>
