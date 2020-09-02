@@ -1,6 +1,6 @@
 <template>
 <div>
-  <MyJumbotron v-bind:list="list" @toggle="changeIdValue" @output="addTask"></MyJumbotron>
+  <MyJumbotron  @toggle="changeIdValue" @output="addTask"></MyJumbotron>
 </div>
 
 </template>
@@ -11,23 +11,28 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import MyJumbotron from './components/MyJumbotron.vue'
+import axios from 'axios';
+
 
 export default {
   name: 'App',
   components: {
    MyJumbotron
   },
+  proprs: {
+    whatToDisplay: String
+  },
    data() {
      return {
-      list: [
-        {id: 0, name: "Ecrire le sujet", todo: true},
-        {id: 1, name: "Faire le sujet", todo: true},
-        {id: 2, name: "Vendre le sujet", todo: true},
-        {id: 3, name: "Partir en vacances", todo: true}
-    ]
+      
      }
   },
   methods: {
+    async getData() {
+      let dbList = await axios.get('http://localhost:3000/todo')
+      let myList =  dbList.data;
+      this.$store.dispatch('getDataFromApp', myList)
+    },
     changeIdValue(id) {
       // let liste = this.list
       this.list[id.id].todo = !this.list[id.id].todo
@@ -45,6 +50,9 @@ export default {
         window.alert("Please, enter a task!")
       }
     }
+  },
+  beforeMount() {
+    this.getData()
   }
 }
 

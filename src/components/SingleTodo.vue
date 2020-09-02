@@ -1,13 +1,15 @@
 <template>
      
-    <p v-if="e.todo" @click="checkedTodo">
-        <b-icon icon="check2-circle"></b-icon>
+    <p v-if="e.todo">
+        <b-icon icon="check2-circle"  @click="checkedTodo"></b-icon>
         {{e.name}}
+         <b-icon @click="deleteItem" icon="trash2"></b-icon>
         </p>
     
-    <p v-else class="clickedP" @click="checkedTodo">
-        <b-icon icon="check-circle-fill"></b-icon>
+    <p v-else class="clickedP" >
+        <b-icon icon="check-circle-fill" @click="checkedTodo"></b-icon>
         {{e.name}}
+        <b-icon @click="deleteItem" icon="trash2-fill"></b-icon>
         </p>
 </template>
 
@@ -25,8 +27,15 @@ export default {
         async checkedTodo() {
             console.log(this.e.id)
             await axios.put(`http://localhost:3000/todo/${this.e.id}`)
-            this.$emit("stateChange")
+            this.$store.dispatch('updateData',this.e.id)
           
+        }, 
+        async deleteItem() {
+            await axios.delete(`http://localhost:3000/todo/${this.e.id}`)
+            this.$store.dispatch('deleteData',this.e.id)
+
+    
+
         }
     }
 }

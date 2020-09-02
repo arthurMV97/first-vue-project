@@ -1,27 +1,27 @@
 <template>
     <div>
     
-    <p v-if="ifChecked() === 0" id="dark-green">
+    <p v-if="newList.length === 0" id="dark-green">
         <b-icon icon="emoji-sunglasses"></b-icon>
         Congratulation !! You finished all the {{list.length}} tasks
         <b-icon icon="emoji-sunglasses"></b-icon>
         </p>
 
-    <p v-else-if="ifChecked() === list.length" id="dark-red">
+    <p v-else-if="newList.length === list.length" id="dark-red">
         <b-icon icon="emoji-angry"></b-icon>
-        It's time to start working you have {{ifChecked()}} tasks to do !!
+        It's time to start working you have {{newList.length}} tasks to do !!
         <b-icon icon="emoji-angry"></b-icon>
     </p>
 
-    <p v-else-if="ifChecked() >= (list.length/2)" id="light-red" >
+    <p v-else-if="newList.length >= (list.length/2)" id="light-red" >
         <b-icon icon="emoji-smile-upside-down"></b-icon>
-        Continue that way and you will finish soon, still have {{ifChecked()}}/{{list.length}} tasks
+        Continue that way and you will finish soon, still have {{newList.length}}/{{list.length}} tasks
         <b-icon icon="emoji-smile-upside-down"></b-icon>
         </p>
 
     <p v-else id="light-green">
         <b-icon icon="emoji-laughing"></b-icon>
-         Good !! you made half or more {{list.length-ifChecked()}}/{{list.length}} tasks
+         Good !! you made half or more {{list.length-newList.length}}/{{list.length}} tasks
          <b-icon icon="emoji-laughing"></b-icon>
          </p>
     
@@ -44,10 +44,7 @@ export default {
           }
   },
     methods: { 
-        ifChecked() {
-            
-            return this.newList.length
-        }
+       
     }, async munted() {
         console.log('hhh');
             let dbList = await axios.get('http://localhost:3000/todo')

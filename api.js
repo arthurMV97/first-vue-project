@@ -64,12 +64,27 @@ app.put("/todo/:id", async (req, res) =>{
   try {
     let id = req.params.id
     const result = await TodoModel.find({id: id});
-    const result2 = await TodoModel.findOneAndUpdate({id: id}, {$set:{todo:!result[0].todo}}, {new: true})
+    const result2 = await TodoModel.updateOne({id: id}, {$set:{todo:!result[0].todo}})
     res.send(result2)
 
   } catch (error) {
-    
+    res.status(500).send(error);
   }
+})
+
+app.delete("/todo/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    const result = await TodoModel.findOneAndRemove({id: id}, err => {
+      if (err) throw err; 
+      res.send(err);
+    })
+    }
+    catch (error) {
+      res.status(500).send(error);
+    }
+    
+  
 })
   app.listen(3000, () => {
     console.log("http://localhost:3000/");

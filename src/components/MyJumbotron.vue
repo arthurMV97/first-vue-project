@@ -17,7 +17,7 @@
     <p>
       Easy to use, we create this web app just for you !
     </p>
-    <Sentence></Sentence>
+   
     <hr class="my-4">
    <router-view :key="$route.fullPath"></router-view>
     <!-- <ListTodo  @toggle="sendIdToApp"></ListTodo> -->
@@ -29,15 +29,14 @@
 <script>
 // import ListTodo from './ListTodo.vue'
 // import AddForm from './AddForm.vue'
-import Sentence from './Sentence.vue'
+// import Sentence from './Sentence.vue'
 import MyHeader from './MyHeader.vue'
+
+
 
 export default {
     name: 'MyJumbotron',
     components: {
-      // ListTodo,
-      // AddForm,
-      Sentence,
       MyHeader
     },
     props: {
@@ -47,9 +46,6 @@ export default {
     sendIdToApp(id) {
       this.$emit("toggle", id)
     },
-    // sendInputValue(val) {
-    //   this.$emit("output", val)
-    // }
     }
 }
 

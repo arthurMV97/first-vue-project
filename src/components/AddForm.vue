@@ -23,11 +23,7 @@ export default {
         }
   },
     methods: { 
-        // addTodo() {
-        //     this.$emit("output", this.inputValue)
-        //     console.log(this.inputValue)
-        //     this.inputValue = ""
-        // },
+      
        async postData() {
         
         
@@ -38,12 +34,15 @@ export default {
                 window.alert("Please, enter a task!")
             }
             else {
-                await axios.post('http://localhost:3000/todo', {
-                    name: this.inputValue,
-                    id: myList.length,
-                    createdAt: (new Date()).toString(),
-                    todo: true
-            })
+                let taskToadd = {
+                                name: this.inputValue,
+                                id: myList.length,
+                                createdAt: (new Date()).toString(),
+                                todo: true
+                                }
+                await axios.post('http://localhost:3000/todo', taskToadd)
+            this.$store.dispatch('postDataFromAddForm',taskToadd)
+            this.inputValue = ""
             }
             
         }

@@ -1,9 +1,9 @@
 <template>
 
 <ul>
-        <li v-for="e in list" :key="e.id">
+        <li v-for="e in dataFct" :key="e.id">
            
-            <SingleTodo v-bind:e="e" @stateChange="updateFct"></SingleTodo> 
+            <SingleTodo v-bind:e="e" ></SingleTodo> 
         </li>
     </ul>    
 
@@ -14,7 +14,8 @@
 
 <script>
 import SingleTodo from './SingleTodo.vue'
-import axios from 'axios';
+
+
 
 export default {
     name: 'ListTodo',
@@ -23,40 +24,22 @@ export default {
     }, 
     data() {
       return {
-          list: []
+          // list: []
         }
   },
     props: {
     whatToDisplay: String
   },
   methods : {
-    //   sendIdToJumbo(id) {
-         
-    //       this.$emit("toggle", id)
-          
-    //   },
-   async updateFct() {
-        let dbList = await axios.get('http://localhost:3000/todo')
-   let myList = await dbList.data;
-   this.list = myList
-   }
-  },
-  async mounted() {
-      console.log('hello')
-    let dbList = await axios.get('http://localhost:3000/todo')
-    let myList = await dbList.data;
-    console.log(myList)
-      if (this.whatToDisplay === "all") {
-        this.list = myList
-      }
-      else if (this.whatToDisplay === "done") {
-        this.list = myList.filter(e => e.todo === false)
-      } 
-      else {
-        this.list = myList.filter(e => e.todo === true)
 
-      }
-     console.log(this.list)
+  },
+  computed: {
+    dataFct() 
+      {
+        // console.log(this.whatToDisplay)
+     return this.$store.getters.allTask(this.whatToDisplay)
+    }
+    
   }
 }
 </script>
