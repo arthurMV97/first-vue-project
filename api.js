@@ -75,7 +75,8 @@ app.put("/todo/:id", async (req, res) =>{
 app.delete("/todo/:id", async (req, res) => {
   try {
     let id = req.params.id;
-    const result = await TodoModel.findOneAndRemove({id: id}, err => {
+    console.log(id)
+    await TodoModel.findOneAndRemove({id: id}, err => {
       if (err) throw err; 
       res.send(err);
     })

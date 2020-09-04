@@ -20,7 +20,8 @@ export default new Vuex.Store({
            state.list[index].todo = !state.list[index].todo
         },
         deleteElement(state, id) {
-            state.list.splice(id, 1)
+            let index = state.list.findIndex(e => e.id === id)
+            state.list.splice(index, 1)
         }
     },
    

@@ -31,7 +31,9 @@ export default {
           
         }, 
         async deleteItem() {
+            console.log(this.e.id)
             await axios.delete(`http://localhost:3000/todo/${this.e.id}`)
+           
             this.$store.dispatch('deleteData',this.e.id)
 
     
